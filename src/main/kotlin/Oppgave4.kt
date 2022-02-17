@@ -34,11 +34,11 @@ fun Shop.groupCustomersByCity(): Map<City, Set<Customer>> =
 
 // Finn kundens dyreste ordre.
 fun Customer.getMostExpensiveOrder(): Order? =
-    orders.maxBy { it.products.sumByDouble { it.price } }
+    orders.maxByOrNull { order -> order.products.sumByDouble { it.price } }
 
 // Finn butikken som har solgt varer for mest penger.
 fun List<Shop>.findMostValuableShop(): Shop? =
-    maxBy { shop ->
+    maxByOrNull { shop ->
         shop.customers
             .flatMap { it.orders }
             .flatMap { it.products }
